@@ -2,34 +2,35 @@
 @{
     ViewData["Title"] = "Category - " + Model.SelectedCategory.CategoryName;
 }
-@if(Model.SelectedCategory != null){
-    <h2>@Model.SelectedCategory.CategoryName</h2>
-    <img class="w-100" src="~/images/category@(Model.SelectedCategory.CategoryId).jpeg"
-         alt="@Model.SelectedCategory.CategoryName" />
-    <p>@Model.SelectedCategory.Description</p>
-}
-<hr />
+<div class="text-center">
+    @if(Model.SelectedCategory != null){
+        <h2>@Model.SelectedCategory.CategoryName</h2>
+        <img class="w-50 rounded-circle" src="~/images/category@(Model.SelectedCategory.CategoryId).jpeg"
+             alt="@Model.SelectedCategory.CategoryName" />
+        <h3>Description</h3>
+        <p>@Model.SelectedCategory.Description</p>
+    }
+    <hr />
+</div>
 <div>
 
-    @if(Model.Products != null){
-        <div id="product-columns">
-            <ul class="list-group">
-                @foreach (var p in Model.Products)
-                {
-                        <li class="list-group-item d-flex justify-content-between align-items-start">
-                            <a asp-controller="Home" asp-action="ProductDetail"
-                               asp-route-id="@p.ProductId" class="btn btn-outline-primary">
-                                <div class="ms-2 me-auto">
-                                    @p.ProductName
-                                </div>
-                                <span class="badge bg-primary rounded-pill">
-                                    @(p.UnitPrice is null ? "zero" : p.UnitPrice.Value.ToString("C"))
-                                </span>
-                            </a>
-                        </li>
-                }
-            </ul>
-        </div>
+    @if(Model.Products != null){        
+        <ul class="list-group">
+            @foreach (var p in Model.Products)
+            {
+                    <li class="list-group-item d-flex justify-content-between align-items-start">
+                        <a asp-controller="Home" asp-action="ProductDetail"
+                            asp-route-id="@p.ProductId" class="btn btn-outline-success">
+                            <div class="ms-2 me-auto">
+                                @p.ProductName
+                            </div>
+                            <span class="badge bg-success rounded-pill">
+                                @(p.UnitPrice is null ? "zero" : p.UnitPrice.Value.ToString("C"))
+                            </span>
+                        </a>
+                    </li>
+            }
+        </ul>        
     }        
     
 </div>
